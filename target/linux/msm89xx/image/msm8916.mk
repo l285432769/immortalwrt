@@ -61,8 +61,9 @@ TARGET_DEVICES += openstick-ufi003
 
 define Device/openstick-sp970
   $(Device/msm8916)
-  DEVICE_VENDOR := Handsome
+  DEVICE_VENDOR := thwc
   DEVICE_MODEL := OpenStick SP970
+  DEVICE_DTS := msm8916-thwc-sp970
   DEVICE_PACKAGES := openstick-tweaks wpad-basic-wolfssl kmod-qcom-modem qcom-msm8916-modem-openstick-sp970-firmware qcom-msm8916-openstick-sp970-wcnss-firmware qcom-msm8916-wcnss-openstick-sp970-nv
 endef
 
