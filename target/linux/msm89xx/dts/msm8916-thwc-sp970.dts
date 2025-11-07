@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
 /dts-v1/;
-+#include "msm8916-handsome-openstick-common.dtsi"
-+
-+/ {
-+	model = "Handsome OpenStick SP970";
-+	compatible = "handsome,openstick", "qcom,msm8916";
+#include "msm8916-ufi.dtsi"
+
+/ {
+	model = "sp970 4G Modem Stick";
+	compatible = "thwc,sp970", "qcom,msm8916";
+};
+
 +
 +	gpio-keys {
 +		compatible = "gpio-keys";
