@@ -67,7 +67,7 @@ define Device/openstick-sp970
   DEVICE_PACKAGES := openstick-tweaks wpad-basic-wolfssl kmod-qcom-modem qcom-msm8916-modem-openstick-sp970-firmware qcom-msm8916-openstick-sp970-wcnss-firmware qcom-msm8916-wcnss-openstick-sp970-nv
 endef
 
-TARGET_DEVICES += Hopenstick-sp970
+TARGET_DEVICES += openstick-sp970
 
 define Device/openstick-uz801
   $(Device/msm8916)
