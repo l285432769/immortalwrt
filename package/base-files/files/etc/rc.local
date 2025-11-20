@@ -1,4 +1,41 @@
-# Put your custom commands here that should be executed once
-# the system init finished. By default this file does nothing.
+#!/bin/sh
+# 系统启动后自动配置USB网络、切换USB模式、挂载存储并管理docker服务
 
+LOG_TAG="USB-AutoConfig"
+log() {
+    echo "[$(date)] [$LOG_TAG] $1"
+}
+
+# 1. 管理USB网络连接
+log "检查USB网络连接..."
+if nmcli connection show "USB" >/dev/null 2>&1; then
+    log "启动USB网络连接..."
+    if nmcli connection up USB; then
+        sleep 5
+        log "关闭USB网络连接..."
+        nmcli connection down USB
+    else
+        log "警告：启动USB网络连接失败"
+    fi
+else
+    log "未找到名为'USB'的网络连接"
+fi
+sleep 3
+
+# 2.  检查USB模式切换
+log "检查USB模式..."
+USB_DEBUG_PATH="/sys/kernel/debug/usb/ci_hdrc.0"
+if [ -d "$USB_DEBUG_PATH" ]; then
+    if grep -q "0" "$USB_DEBUG_PATH/device" && grep -q "speed" "$USB_DEBUG_PATH/device"; then
+        log "切换USB为host模式..."
+        echo host > "$USB_DEBUG_PATH/role" 2>/dev/null
+        sleep 20
+    else
+        log "USB模式无需切换"
+    fi
+else
+    log "警告：USB调试路径不存在 $USB_DEBUG_PATH"
+fi
+
+log "启动脚本执行完成"
 exit 0
